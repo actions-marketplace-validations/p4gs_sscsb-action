@@ -2,7 +2,7 @@
 #
 # Runs `sscsb` (p4gs/sscs-bootstrapper) against the repository that invokes it
 # and builds a scan record in the exact shape the public directory at
-# tools.sensiblesecurity.xyz/sscsb/ consumes. Because this runs inside the
+# sscsb.dev consumes. Because this runs inside the
 # repository's OWN CI with its own token, GitHub-side checks are performed
 # authenticated — the "auth'd scan results" lane, versus the directory's
 # unauthenticated external scans.
