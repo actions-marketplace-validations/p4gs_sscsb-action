@@ -6,6 +6,14 @@ follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- **The public directory moved to the root of `sscsb.dev`** (from
+  `tools.sensiblesecurity.xyz/sscsb/`). Documentation links and comments in
+  this repo follow it; the action's behaviour, its record schema and its
+  submission lane are unchanged. Released entries below are left as they were
+  written and still name the old host.
+
 ### Added
 
 - **OSV-Scanner is installed on the runner** (pinned v2.4.0, sha256-checked,
