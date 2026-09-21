@@ -1,7 +1,14 @@
 /**
- * Site-wide constants. BASE_PATH is the project-Pages prefix — every internal
- * href must start with it (enforced by the link-integrity test), because the
- * site serves at tools.sensiblesecurity.xyz/sscs-bootstrapper/, never at /.
+ * A vendored slice of the directory site's own constants, so a record this
+ * action builds is stamped with the same methodology version the site scores
+ * against. `METHODOLOGY_VERSION` is the only export anything here imports.
+ *
+ * The path/name constants below are LEFTOVERS of that copy and are dead in
+ * this repo. They also no longer describe the live site, which serves at the
+ * ROOT of sscsb.dev — it moved off `tools.sensiblesecurity.xyz/sscs-bootstrapper/`,
+ * then off `/sscsb/`. They are left in place rather than corrected because a
+ * dead constant with an invented value is worse than one that is visibly
+ * historical; deleting them is its own change.
  */
 export const BASE_PATH = "/sscs-bootstrapper/";
 

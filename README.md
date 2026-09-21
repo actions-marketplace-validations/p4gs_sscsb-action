@@ -3,13 +3,13 @@
 Run [`sscsb`](https://github.com/p4gs/sscs-bootstrapper) — the SSCS
 Bootstrapper supply-chain-security CLI — inside your repository's **own CI**,
 and produce an authenticated scan record for the public directory at
-[tools.sensiblesecurity.xyz/sscsb/](https://tools.sensiblesecurity.xyz/sscsb/).
+[sscsb.dev](https://sscsb.dev).
 
 The action installs a Sigstore-verified `sscsb` release, runs the exact scan
 protocol the directory uses (pre-init snapshot → `init` → `verify` → `report`
 → fresh-init defaults), builds a schema-v1 `scan-record.json` with the same
 vendored scoring code the directory publishes on its
-[methodology page](https://tools.sensiblesecurity.xyz/sscsb/methodology/),
+[methodology page](https://sscsb.dev/methodology/),
 keyless-signs it under your workflow's own OIDC identity, and uploads record +
 signature bundle as a workflow artifact. Optionally, it files a submission
 issue so the directory can pick the record up through its maintainer publish
@@ -206,13 +206,18 @@ action therefore snapshots `git ls-files` **before** running `init`; the
 record builder refuses to count anything created after that snapshot as your
 evidence, and controls that can only be observed in a local development
 environment are recorded as `unverified` rather than passed. Full rules on the
-[methodology page](https://tools.sensiblesecurity.xyz/sscsb/methodology/).
+[methodology page](https://sscsb.dev/methodology/).
 
 Tip: `sscsb` orchestrates external scanners (TruffleHog, Gitleaks, Syft,
-Trivy, OSV-Scanner, …). Tools missing on the runner degrade the affected
-checks, which lowers *evidence coverage*, not your pass rate — installing them
-in a step before this action raises how much of your posture the record can
-actually attest.
+Trivy, OSV-Scanner, …). The action installs OSV-Scanner itself (pinned and
+digest-checked, Linux x86_64), so under `sscsb` 0.4 and newer `verify
+vuln-scan` runs a real scan and a finding at or above your `fail_on`
+(`[controls.vuln-scan] fail_on` in `.sscsb/config.toml`, default `high`) is a
+`fail` in the record. Against 0.3.x the row is still a presence check, so
+pin `sscsb-version` to 0.4 or later to get the gate. Other tools
+missing on the runner degrade the affected checks, which lowers *evidence
+coverage*, not your pass rate — installing them in a step before this action
+raises how much of your posture the record can actually attest.
 
 ## Version compatibility
 
